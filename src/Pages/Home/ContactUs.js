@@ -11,17 +11,17 @@ const ContactUs = () => {
           <input
             type="text"
             placeholder="Email Address"
-            class="input input-bordered input-primary mt-2 w-full max-w-xs"
+            className="input input-bordered input-primary mt-2 w-full max-w-xs"
           />
           
           <input
             type="text"
             placeholder="Subject"
-            class="input input-bordered input-primary mt-2 w-full max-w-xs"
+            className="input input-bordered input-primary mt-2 w-full max-w-xs"
           />
          
           <textarea
-            class="textarea textarea-primary mt-2 w-full max-w-xs"
+            className="textarea textarea-primary mt-2 w-full max-w-xs"
             placeholder="Your message"
           ></textarea>
           <button className="btn btn-secondary mt-2 justify-self-center uppercase text-white bg-gradient-to-r from-secondary to-primary font-bold">
