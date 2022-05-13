@@ -10,7 +10,7 @@ const service = ({ service }) => {
           <h2 className="card-title">{name}</h2>
           <p>{
              slots.length > 0
-             ? <span>{slots.length[0]}</span>
+             ? <span>{slots[0]}</span>
              : <span className="text-red-500">No Space Available Try Another Day</span>
              }
           </p>
@@ -18,7 +18,7 @@ const service = ({ service }) => {
             {slots.length} {slots.length > 1 ? "spaces" : "space"} Available
           </p>
           <div className="card-actions">
-            <button className="btn btn-secondary uppercase text-white bg-gradient-to-r from-secondary to-primary font-bold">Book Appointment</button>
+            <button disabled={slots.length === 0} className="btn btn-secondary uppercase text-white bg-gradient-to-r from-secondary to-primary font-bold">Book Appointment</button>
           </div>
         </div>
       </div>
