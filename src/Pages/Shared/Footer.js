@@ -2,12 +2,14 @@ import React from "react";
 import footer from "../../assets/images/footer.png";
 
 const Footer = () => {
+  const today = new Date();
+  const year = today.getFullYear();
   return (
     <footer
       style={{ backgroundImage: `url(${footer})`, backgroundSize: "cover" }}
-      className=" p-10 "
+      className=" px-10 "
     >
-      <div className="footer">
+      <div className="footer mt-10">
         <div>
           <span className="footer-title">Services</span>
           <a className="link link-hover">Branding</a>
@@ -29,8 +31,10 @@ const Footer = () => {
           <a className="link link-hover">Cookie policy</a>
         </div>
       </div>
-      <div className="text-center pt-5">
-        <p>Copyright © 2022 - All right reserved by ACME Industries Ltd</p>
+      <div className="text-center p-5">
+        <p>
+          <small>Copywrite © {year} All Rights Reserved</small>
+        </p>
       </div>
     </footer>
   );
