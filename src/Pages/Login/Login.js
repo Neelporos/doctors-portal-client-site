@@ -120,6 +120,7 @@ const Login = () => {
                 )}
               </label>
             </div>
+            <button className="mb-3" >Forget Password?</button>
             {singInError}
             <input
               className="btn w-full max-w-xs text-white"
