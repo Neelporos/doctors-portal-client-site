@@ -2,8 +2,9 @@ import React from 'react';
 import {
     useCreateUserWithEmailAndPassword,
     useSignInWithGoogle,
+    useUpdateProfile,
   } from "react-firebase-hooks/auth";
-  import { Link,  useNavigate } from "react-router-dom";
+  import { Link,  useLocation,  useNavigate } from "react-router-dom";
   import auth from "../../firebase.init";
   import { useForm } from "react-hook-form";
   import Loading from "../Shared/Loading";
@@ -18,13 +19,18 @@ const SingUp = () => {
         error,
       ] = useCreateUserWithEmailAndPassword(auth);
 
+      const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+
   let singInError;
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
+
   const navigate = useNavigate();
+  const location = useLocation();
+  let from = location.state?.from?.pathname || "/";
 
   if (gLoading || loading) {
     return <Loading></Loading>
@@ -39,13 +45,15 @@ const SingUp = () => {
   }
 
   if (user || gUser) {
-    navigate("/");
+    navigate(from, { replace: true });
     console.log(gUser);
   }
 
-  const onSubmit = (data) => {
-    createUserWithEmailAndPassword(data.email, data.password);
-    console.log(data);
+  const onSubmit = async (data) => {
+    await createUserWithEmailAndPassword(data.email, data.password);
+    await updateProfile({ displayName: data.name})
+    console.log('updated profile');
+    navigate("/appointment");
   };
     return (
         <div className="flex h-screen justify-center items-center">
