@@ -2,6 +2,7 @@ import React from "react";
 import {
   useSignInWithEmailAndPassword,
   useSignInWithGoogle,
+  useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
@@ -13,6 +14,8 @@ const Login = () => {
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
 
+    const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+
   let singInError;
   const {
     register,
@@ -21,14 +24,14 @@ const Login = () => {
   } = useForm();
   const navigate = useNavigate();
 
-  if (gLoading || loading) {
+  if (gLoading || loading || updating) {
     return <Loading></Loading>
   }
 
-  if (error || gError) {
+  if (error || gError || updateError) {
     singInError = (
       <p className="text-red-500">
-        {error?.message} || {gError?.message}
+        {error?.message} || {gError?.message} || {updateError?.message}
       </p>
     );
   }
@@ -38,9 +41,11 @@ const Login = () => {
     console.log(gUser);
   }
 
-  const onSubmit = (data) => {
-    signInWithEmailAndPassword(data.email, data.password);
-    console.log(data);
+  const onSubmit = async data => {
+   await signInWithEmailAndPassword(data.email, data.password);
+   await updateProfile({ displayName: data.name})
+    console.log('updated profile');
+    navigate("/appointment");
   };
   return (
     <div className="flex h-screen justify-center items-center">
