@@ -5,6 +5,7 @@ import Appointment from './Pages/Appointment/Appointment';
 import Contact from './Pages/Contact/Contact';
 import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
+import SingUp from './Pages/Login/SingUp';
 import Reviews from './Pages/Reviews/Reviews';
 import Navbar from './Pages/Shared/Navbar';
 
@@ -18,6 +19,7 @@ function App() {
           <Route path='/reviews' element={<Reviews></Reviews>}></Route>
           <Route path='/contact' element={<Contact></Contact>}></Route>
           <Route path='/login' element={<Login></Login>}></Route>
+          <Route path='/singup' element={<SingUp></SingUp>}></Route>
           <Route path='/about' element={<About></About>}></Route>
         </Routes>
     </div>
