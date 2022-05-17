@@ -8,6 +8,7 @@ import {
   import auth from "../../firebase.init";
   import { useForm } from "react-hook-form";
   import Loading from "../Shared/Loading";
+import useToken from '../../Hooks/useToken';
   
 
 const SingUp = () => {
@@ -28,6 +29,8 @@ const SingUp = () => {
     handleSubmit,
   } = useForm();
 
+  const [token] = useToken(user || gUser)
+
   const navigate = useNavigate();
   const location = useLocation();
   let from = location.state?.from?.pathname || "/";
@@ -44,16 +47,14 @@ const SingUp = () => {
     );
   }
 
-  if (user || gUser) {
-    navigate(from, { replace: true });
-    console.log(gUser);
+  if (token) {
+    navigate("/appointment");
   }
 
   const onSubmit = async (data) => {
     await createUserWithEmailAndPassword(data.email, data.password);
     await updateProfile({ displayName: data.name})
-    console.log('updated profile');
-    navigate("/appointment");
+    
   };
     return (
         <div className="flex h-screen justify-center items-center">
